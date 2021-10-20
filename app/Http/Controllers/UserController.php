@@ -28,7 +28,8 @@ class UserController extends Controller
     }
     public function days(Request $request){
 
-        $monthdays = 30;
+
+        $monthdays = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
 
         for($i = 0; $i < $monthdays; $i++){
             if($request->input($i)){

@@ -9,14 +9,15 @@ oi {{Auth::user()->name}}
 <button>selecionar dias disponiveis</button>
 
 <div class='select-days-modal'>
-    {{date('M')}}
+    {{date('m')}}
+    {{cal_days_in_month(CAL_GREGORIAN, 1, 2021)}}
 
-    <form method='POST'>
+    <form method='POST' class='calendar'>
         @csrf
-        <input name='0' type='checkbox' value='2021/02/02 '>
-        <input name='1' type='checkbox' value='2021/02/03'>
 
         <input type='submit' value='salvar'>
     </form>
 
 </div>
+
+<script src='{{asset("js/user.js")}}'></script>
