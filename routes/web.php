@@ -33,8 +33,8 @@ Route::post('/login/forgot_password', 'Auth\LoginController@forgotAction');
 Route::get('/confirmation/{email}', 'MainController@confirm')->name('confirmation');
 Route::post('/confirmation', 'MainController@confirmAction')->name('confirmAction');
 
-// Route::get('/user/{id}', 'UserController@index')->name('user');
-// Route::post('/user/{id}', 'UserController@days');
+Route::get('/user', 'UserController@index')->name('user');
+Route::post('/user', 'UserController@days');
 
 Route::fallback(function(){
     return redirect()->route('home');

@@ -25,6 +25,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('task-maker', function($user){
+            return $user->level >= 1 ? true : false;
+        });
+
+        Gate::define('config-church', function($user){
+            return $user->level === 2 ? true : false;
+        });
+
     }
 }
