@@ -1,3 +1,7 @@
+<head>
+    <link href='{{asset("css/user.css")}}' rel='stylesheet'>
+</head>
+
 oi {{Auth::user()->name}}
 
 {{$userStatus}}
@@ -9,12 +13,14 @@ oi {{Auth::user()->name}}
 <button>selecionar dias disponiveis</button>
 
 <div class='select-days-modal'>
-    {{date('m')}}
+    {{$month}}
     {{cal_days_in_month(CAL_GREGORIAN, 1, 2021)}}
 
     <form method='POST' class='calendar'>
         @csrf
-
+        <table class='days'>
+            
+        </table>
         <input type='submit' value='salvar'>
     </form>
 

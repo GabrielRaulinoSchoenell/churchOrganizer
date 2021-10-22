@@ -24,7 +24,18 @@ class UserController extends Controller
     public function index(){
         $this->userStatus = $this->defineStatus();
 
-        return view('user.profile', ['userStatus' => $this->userStatus]);
+        $months =['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+
+        foreach($months as $key => $month){;
+            if(date('m') === strval($key) ){
+                $months = $month;
+            }
+        }        
+
+        return view('user.profile', [
+            'userStatus' => $this->userStatus,
+            'month' => $months
+        ]);
     }
     public function days(Request $request){
 

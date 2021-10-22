@@ -45,6 +45,10 @@ class LoginController extends Controller
         $forgot = $request->input('forgot');
         $email = $data['email'];
 
+        if(User::where('email', $data['email'])->first() == null){
+            return redirect()->route('login')->with('warning', 'Email não pertence a um usuário');
+        } 
+
         if($forgot && $data['email']){
             Mail::send('confirmEmail', ["email" => $email], function($message) use($email){
                 $message->from(env('MAIL_USERNAME', 'gabrielraulinoschoenell@gmail.com'), 'Gabriel Raulino');

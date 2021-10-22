@@ -1,4 +1,10 @@
-let calendar = document.querySelector('.calendar');
+document.querySelector('button').addEventListener('click', ()=>{
+    document.querySelector('.select-days-modal').style.display = 'flex';
+});
+
+
+
+let calendar = document.querySelector('.days');
 let month = new Date().getMonth();
 let year = (new Date().getFullYear()).toString();
 
