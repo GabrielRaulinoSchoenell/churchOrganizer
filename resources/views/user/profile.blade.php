@@ -2,7 +2,10 @@
     <link href='{{asset("css/user.css")}}' rel='stylesheet'>
 </head>
 
-oi {{Auth::user()->name}}
+oi {{Auth::user()->name}} <br>
+
+
+<a href='{{route("updateProfile")}}'>alterar perfil</a>
 
 {{$userStatus}}
 

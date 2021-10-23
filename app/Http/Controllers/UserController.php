@@ -5,17 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Allowed_day;
+use App\Models\User;
+use App\Models\plan;
 
 class UserController extends Controller
 {
 
-    public $userStatus = 'usuário comum';
+    protected $userStatus = 'usuário comum';
+
+    protected $levels = ['usuário comum', 'admin', 'master'];
+
+    protected $months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']; // getting portuguese names
 
     public function __construct(){
+
     }
 
     public function defineStatus(){ // for some reason i couldn't put this method into __construct 
-        $levels = ['usuário comum', 'admin', 'master'];
+        $levels = $this->levels;
         $userLevel = Auth::user()->level; // will return (0, 1, 2) 
         $levels[$userLevel];
         return $levels[$userLevel];
@@ -24,7 +31,7 @@ class UserController extends Controller
     public function index(){
         $this->userStatus = $this->defineStatus();
 
-        $months =['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+        $months = $this->months;
 
         foreach($months as $key => $month){;
             if(date('m') === strval($key) ){
@@ -37,8 +44,27 @@ class UserController extends Controller
             'month' => $months
         ]);
     }
-    public function days(Request $request){
 
+
+    public function update(){   
+        $user = Auth::user();
+
+        return view('user.update', ['user'=>$user]);
+    }
+
+    public function updateAction(Request $request){
+        $data = $request->only(['name', 'birth', 'phone']);
+
+        $update = User::find(Auth::user()->id);
+        $update->name = $data['name'];
+        $update->birthday = $data['birth'];
+        $update->phone = $data['phone'];
+        $update->save();
+
+        return redirect()->route('updateProfile')->with('warning', 'Perfil atualizado com sucesso!');
+    }
+
+    public function days(Request $request){
 
         $monthdays = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
 
@@ -51,11 +77,38 @@ class UserController extends Controller
             }
         }
 
-        
-        
+    }
+     
+    public function tasks(){
+        $data = User::all();
+        $plan = plan::all();
+
+         return view('makeTasks', [
+             'data' => $data,
+             'plan' => $plan
+         ]);   
+    }
+
+    public function setTasks(){
+        echo 'oi';
+    }
+
+    public function setTaskInfo(Request $request){
+        $data = $request->only(['id', 'day', 'period', 'title', 'desc']);
 
 
-
+        $insert = new plan();
+        $insert->user_id = $data['id'];
+        $insert->day = $data['day'];
+        $insert->period = $data['period'];
+        $insert->function = $data['title'];
+        $insert->notes = $data['desc'];
+        $insert->save();
+ 
+        $user = User::find($data['id']);
+        $user->tasks ++;
+        $user->save();
 
     }
+
 }

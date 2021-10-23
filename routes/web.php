@@ -35,6 +35,12 @@ Route::post('/confirmation', 'MainController@confirmAction')->name('confirmActio
 
 Route::get('/user', 'UserController@index')->name('user');
 Route::post('/user', 'UserController@days');
+Route::get('/user/update', 'UserController@update')->name('updateProfile');
+Route::post('user/update', 'UserController@updateAction');
+
+Route::get('/user/makeTasks' , 'UserController@tasks')->name('makeTasks');
+Route::post('/user/makeTasks', 'UserController@setTasks');
+Route::post('/user/makeTasks/setTaskInfo', 'UserController@setTaskInfo')->name('taskInfo');
 
 Route::fallback(function(){
     return redirect()->route('home');

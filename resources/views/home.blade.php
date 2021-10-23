@@ -5,15 +5,25 @@
 
 
 suas ultimas tarefas: 
-
+<br>
 //<br> 
 //<br>
+
+
+@foreach($data as $item)
+    <hr>
+    <div>{{$item[0]}} no periodo da {{$item[1]}}</div>
+    <div>{{$item[2]}}</div>
+    <div>{{$item[3]}}</div>
+    {{-- HomeController criei uma array sem keys, porisso os numeros (day, period, function e notes) --}}
+@endforeach
+
 
 <br><br><br>
 
 @if($taskMaker)
 
-    <a href=''>determinar as tarefas</a>
+    <a href='{{route("makeTasks")}}'>determinar as tarefas</a>
 
 @endif
 
