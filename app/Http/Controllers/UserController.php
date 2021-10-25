@@ -80,7 +80,7 @@ class UserController extends Controller
     }
      
     public function tasks(){
-        $data = User::all();
+        $data = User::where('company', Auth::user()->company)->get();
         $plan = plan::all();
 
          return view('makeTasks', [

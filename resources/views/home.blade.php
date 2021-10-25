@@ -21,6 +21,14 @@ suas ultimas tarefas:
 
 <br><br><br>
 
+
+@if(!$configChurch)
+
+    <a href='{{route("createChurch")}}'>Criar igreja</a>
+
+@endif
+
+
 @if($taskMaker)
 
     <a href='{{route("makeTasks")}}'>determinar as tarefas</a>
@@ -30,7 +38,7 @@ suas ultimas tarefas:
 <br><br>
 
 @if($configChurch)
-    <a href=''>alterar configurações da igreja</a>
+    <a href='{{route("church", ["id" => Auth::user()->company])}}'>alterar configurações da igreja</a>
 @endif
 
 <br><br>

@@ -9,6 +9,7 @@
 
 //pessoas 
 
+
 @foreach($data as $user)
     <br>
     {{$user->name}}

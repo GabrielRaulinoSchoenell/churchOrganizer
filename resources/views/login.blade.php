@@ -2,7 +2,6 @@
 
 <form method='POST'>
     @csrf
-    <input type=select name='church'> 
 
 
     <input type='email' name='email' placeholder='Digite seu Email' value="{{old('email')}}" >

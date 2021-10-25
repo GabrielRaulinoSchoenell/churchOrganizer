@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
+use App\Models\Church;
 class RegisterController extends Controller
 {
     /*
@@ -44,11 +44,13 @@ class RegisterController extends Controller
     }
 
     public function index(){
-        return view('register');
+        $churches = Church::all();
+
+        return view('register', ['churches' => $churches]);
     }
 
     public function register(Request $request){
-        $data = $request->only(['name', 'email', 'password', 'password_confirmation']);
+        $data = $request->only(['name', 'church', 'email', 'password', 'password_confirmation']);
         
         $validator = $this->validator($data);
 
@@ -60,7 +62,8 @@ class RegisterController extends Controller
         Mail::send('confirmRegistration', [
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'name' => $data['name']
+            'name' => $data['name'],
+            'church' => $data['church']
         ],             
             function($message) use ($data){
                 $message->from(env('MAIL_USERNAME', 'gabrielraulinoschoenell@gmail.com'));
@@ -73,13 +76,15 @@ class RegisterController extends Controller
     }
 
     public function registration(Request $request){
-        $data = $request->only('email', 'password', 'name');
+        $data = $request->only('email', 'password', 'name', 'church');
 
-        $email_verified_at = date('Y/m/d');
-
-        array_push($data, ["verified_at" => $email_verified_at]);
-
-        $this->create($data);
+        $create = new User();
+        $create->name = $data['name'];
+        $create->email =$data['email'];
+        $create->password = $data['password'];
+        $create->company = $data['church'];
+        $create->email_verified_at = date('Y/m/d H:i:s');
+        $create->save();
         
         return redirect()->route('home');
     }
@@ -107,13 +112,5 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-    {
-            return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'email_verified_at' => $data['verified_at']
-        ]);
-    }
+    
 }
