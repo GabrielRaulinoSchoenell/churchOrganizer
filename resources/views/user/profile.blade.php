@@ -16,14 +16,37 @@ oi {{Auth::user()->name}} <br>
 <button>selecionar dias disponiveis</button>
 
 <div class='select-days-modal'>
-    {{$month}}
-    {{cal_days_in_month(CAL_GREGORIAN, 1, 2021)}}
+    {{-- {{cal_days_in_month(CAL_GREGORIAN, 1, 2021)}} --}}
+
 
     <form method='POST' class='calendar'>
         @csrf
-        <table class='days'>
+        <div class='calendar'>
+            <div class='days'>    
+                @foreach($week as $key => $day)
+                    <div class='calendar-week-day calendar-day'> {{$day}}</div>
+                @endforeach
+            </div>
+            <div class='days'>
+                @for($i=0;$i< cal_days_in_month(CAL_GREGORIAN, date('m'), 2021); $i++)
+
+                    
+
+
+                    <div class='calendar-day'>{{$i}}</div>
+
+                @endfor
+            </div>
+
+
+
             
-        </table>
+
+
+
+
+
+        </div>
         <input type='submit' value='salvar'>
     </form>
 

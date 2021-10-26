@@ -28,7 +28,7 @@ suas ultimas tarefas:
 
 @endif
 
-
+<br>
 @if($taskMaker)
 
     <a href='{{route("makeTasks")}}'>determinar as tarefas</a>

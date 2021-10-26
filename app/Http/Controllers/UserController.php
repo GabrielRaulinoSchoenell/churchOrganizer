@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Allowed_day;
 use App\Models\User;
 use App\Models\plan;
+use App\Models\Day_definition;
 
 class UserController extends Controller
 {
@@ -16,6 +17,8 @@ class UserController extends Controller
     protected $levels = ['usuário comum', 'admin', 'master'];
 
     protected $months = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']; // getting portuguese names
+    
+    protected $week = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
 
     public function __construct(){
 
@@ -30,18 +33,13 @@ class UserController extends Controller
 
     public function index(){
         $this->userStatus = $this->defineStatus();
-
-        $months = $this->months;
-
-        foreach($months as $key => $month){;
-            if(date('m') === strval($key) ){
-                $months = $month;
-            }
-        }        
+        $allowed_days = Day_definition::where('church_id', Auth::user()->company)->get();
 
         return view('user.profile', [
             'userStatus' => $this->userStatus,
-            'month' => $months
+            'months' => $this->months,
+            'week' => $this->week,
+            'allowed_days' => $allowed_days
         ]);
     }
 

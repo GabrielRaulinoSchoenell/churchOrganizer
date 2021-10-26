@@ -44,7 +44,10 @@ Route::post('/user/makeTasks/setTaskInfo', 'UserController@setTaskInfo')->name('
 
 Route::get('/church/create', 'ChurchController@create')->name('createChurch');
 Route::post('/church/create', 'ChurchController@createAction');
-Route::get('/church/user/{id}', 'ChurchController@index')->name('church');
+Route::get('/church/{id}', 'ChurchController@index')->name('church');
+Route::put('/church/{id}', 'ChurchController@changeChurchInfo');
+Route::get('/church/{id}/config', 'ChurchController@churchConfig')->name('configDays');
+Route::post('/church/{id}/config', 'ChurchController@churchConfigAction');
 
 Route::fallback(function(){
     return redirect()->route('home');

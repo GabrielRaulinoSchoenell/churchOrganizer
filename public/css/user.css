@@ -5,3 +5,14 @@
 .select-days-modal{
     display: none;
 }
+
+.days{
+    background-color: red;
+    display: flex;
+    width: 1050px;
+    flex-wrap: wrap;
+}
+
+.calendar-day{
+    width: 150px;
+}
