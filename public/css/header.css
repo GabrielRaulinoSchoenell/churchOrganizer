@@ -1,0 +1,31 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+:root{
+    --background-color: #fff;
+}
+
+header{
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+.logo{
+
+    flex: 2;
+}
+.user-info{
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex: 1;
+}
+.user-info a{
+    color: #000;
+    text-decoration: none;
+}
+.user-info a:visited{
+    color: #000;
+}

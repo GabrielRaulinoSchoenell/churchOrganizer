@@ -1,0 +1,20 @@
+*{
+    box-sizing: border-box;
+}
+
+.user-info-name{
+    display: flex;
+    width: 360px;
+    justify-content: space-between;
+}
+
+.profile-photo{
+    width: 45px;
+    height: 45px;
+    background-image: url('../img/dinossauro.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 2px solid #999;
+    border-radius: 50px;
+}

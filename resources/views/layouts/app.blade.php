@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('page-title')</title>
+    <link href='{{asset("css/header.css")}}' rel='stylesheet'>
 </head>
 <body>
     <header>
-        usuario<br>
-
-        <a href='/logout'>Sair</a>
-    
-        
+        <div class='logo'>@yield('logo')</div>
+        <div class='user-info'>@yield('user-info')</div>       
     </header>
 </body>
 </html>

@@ -34,13 +34,18 @@ class UserController extends Controller
     public function index(){
         $this->userStatus = $this->defineStatus();
         $allowed_days = Day_definition::where('church_id', Auth::user()->company)->get();
+        $presentDay = date('w', strtotime(date('Y/m/1')));
+        $daysInMonth = cal_days_in_month(CAL_GREGORIAN, date('m'), 2021);
+
 
         return view('user.profile', [
             'userStatus' => $this->userStatus,
             'months' => $this->months,
             'week' => $this->week,
-            'allowed_days' => $allowed_days
-        ]);
+            'allowed_days' => $allowed_days,
+            'presentDay' => $presentDay,
+            'daysInMonth' => $daysInMonth
+         ]);
     }
 
 
@@ -66,6 +71,7 @@ class UserController extends Controller
 
         $monthdays = cal_days_in_month(CAL_GREGORIAN, date('m'), date('Y'));
 
+
         for($i = 0; $i < $monthdays; $i++){
             if($request->input($i)){
                 $insert = new Allowed_day();
@@ -73,8 +79,10 @@ class UserController extends Controller
                 $insert->day = $request->input($i);
                 $insert->save();
             }
-        }
+    }
 
+
+        // return redirect()->route('user');
     }
      
     public function tasks(){

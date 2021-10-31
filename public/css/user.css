@@ -7,7 +7,6 @@
 }
 
 .days{
-    background-color: red;
     display: flex;
     width: 1050px;
     flex-wrap: wrap;

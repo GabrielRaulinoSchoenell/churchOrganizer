@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\plan;
 use App\Models\User;
+use App\Models\Church;
 
 class HomeController extends Controller
 {
@@ -28,6 +29,8 @@ class HomeController extends Controller
     public function index(){
         $id = Auth::user()->id;
 
+        $church = Church::find(Auth::user()->company);
+
         $days = plan::where('user_id', $id)->get();
         $data = [];
 
@@ -45,7 +48,8 @@ class HomeController extends Controller
             'taskMaker' => Gate::allows('task-maker'),
             'configChurch' => Gate::allows('config-church'),
             'days' => $days,
-            'data' => $data
+            'data' => $data,
+            'church' => $church
         ]);
     }
 

@@ -28,28 +28,29 @@ oi {{Auth::user()->name}} <br>
                 @endforeach
             </div>
             <div class='days'>
-                @for($i=0;$i< cal_days_in_month(CAL_GREGORIAN, date('m'), 2021); $i++)
+                @for($i=0;$i< 42; $i++)
 
+                        @if($i >= $presentDay  && $i < $daysInMonth + $presentDay)
                     
+                                <div class='calendar-day'>
+                                    <div class='calenda-day-number'>{{$i - $presentDay + 1}}</div>
+                                
+                                    <input type='checkbox' name="{{($i - $presentDay +1)}}" value='{{date("Y/m/").($i - $presentDay +1)}}'>
+                                </div>
+                        @else
 
+                            <div class='calendar-day'></div>
+                        @endif
 
-                    <div class='calendar-day'>{{$i}}</div>
 
                 @endfor
             </div>
-
-
-
-            
-
-
-
-
-
         </div>
         <input type='submit' value='salvar'>
     </form>
 
 </div>
+
+
 
 <script src='{{asset("js/user.js")}}'></script>

@@ -81,15 +81,19 @@ class ChurchController extends Controller
     public function churchConfigAction($id, Request $request){
         $data = $request->only(['0','1','2','3','4','5','6']);
         
-        $insert = new Day_definition();
 
+        for($i=0;$i<7;$i++){
+            $delete = Day_definition::where('day', $i);
+            $delete->delete();
+        }      
         foreach($data as $item){
+            $insert = new Day_definition();
             $insert->church_id = Auth::user()->company;
             $insert->day = $item;
             $insert->period = 0;
             $insert->save();
-        }      
+        }
 
-        return redirect()->route('configDays', ['id' => $id]);
+        return redirect()->route('church', ['id' => $id]);
     }
 }
