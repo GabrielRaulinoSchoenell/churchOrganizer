@@ -12,5 +12,9 @@
         <div class='logo'>@yield('logo')</div>
         <div class='user-info'>@yield('user-info')</div>       
     </header>
+    <section class='container'>
+        <aside>@yield('aside')</aside>
+        <section class='content'>@yield('content')</section>
+    </section>
 </body>
 </html>

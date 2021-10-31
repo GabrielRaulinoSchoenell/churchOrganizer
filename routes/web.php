@@ -25,13 +25,8 @@ Route::post('/register', 'Auth\RegisterController@register');
 
 Route::get('/registration', 'Auth\RegisterController@registration')->name('registration');
 
-
-Route::get('/login/forgot_password', 'Auth\LoginController@forgot')->name('forgot');
-Route::post('/login/forgot_password', 'Auth\LoginController@forgotAction');
-
-
 Route::get('/confirmation/{email}', 'MainController@confirm')->name('confirmation');
-Route::post('/confirmation', 'MainController@confirmAction')->name('confirmAction');
+Route::post('/confirmation/{email}', 'MainController@confirmAction')->name('confirmAction');
 
 Route::get('/user', 'UserController@index')->name('user');
 Route::post('/user', 'UserController@days');

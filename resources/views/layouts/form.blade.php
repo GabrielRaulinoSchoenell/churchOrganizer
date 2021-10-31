@@ -15,6 +15,9 @@
     <footer>
         <div class='container'>@yield('footer')</div>
     </footer>
+    <div class='modal'>
+        <div class='error-message'>@yield('failures')</div>
+    </div>
 </body>
 </html>
 

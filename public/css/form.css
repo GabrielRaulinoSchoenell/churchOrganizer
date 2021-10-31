@@ -125,3 +125,11 @@ footer{
 footer .container{
     padding: 20px;
 }
+
+.modal{
+    displaY: flex;
+    justify-content: center;
+    align-items:center;
+    height: 200px;
+    font-size: 30px
+}

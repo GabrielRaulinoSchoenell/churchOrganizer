@@ -13,12 +13,47 @@
         <a href='{{route("church", ["id" => $church->id])}}'>{{$church->name}}</a>
     </div>
     <div class='profile-photo'></div>
+
+    <a id='logout' href='{{route("logout")}}'>sair</a>
 @endsection
 
-{{-- 
-<a href='{{route("user")}}'>{{Auth::user()->name}}</a>
+@section('aside')
+    {{$church->name}}
+@endsection
 
 
+@section('content')
+    <div class='content-title'>
+        <h1>Suas Tarefas:</h1>
+    </div>
+
+        @foreach($data as $item)
+        <div class='user-tasks'>
+            <div class='task-title'>
+                <h1>{{$item[2]}}</h1>
+                <div class='date'>{{$item[0]}}</div>
+            </div>
+            <div class='task-desc'>
+                {{$item[3]}}
+
+                @if($item[1] === 0)
+                    Manhã
+                @endif    
+                @if($item[1] === 1)
+                    Tarde
+                @endif
+                @if($item[1] === 2)
+                    Noite
+                @endif
+            </div>
+        </div>
+            {{-- HomeController criei uma array sem keys, porisso os numeros (day, period, function e notes) --}}
+        @endforeach
+
+@endsection
+
+
+{{--
 suas ultimas tarefas: 
 <br>
 //<br> 

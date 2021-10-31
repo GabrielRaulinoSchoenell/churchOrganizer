@@ -1,5 +1,9 @@
 *{
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.logout{
+    color: red;
 }
 
 .user-info-name{
@@ -11,10 +15,63 @@
 .profile-photo{
     width: 45px;
     height: 45px;
-    background-image: url('../img/dinossauro.png');
+    background-image: url('../img/igor.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     border: 2px solid #999;
     border-radius: 50px;
+}
+
+.container{ 
+    width: 1600px;
+    margin: 10px auto ;
+    display: flex;
+}
+aside{
+    flex: 2;
+    margin: 10px;
+    height: 800px;
+}
+.content{
+    flex: 3;
+    margin: 10px;
+    height: 800px;
+    box-shadow: 4px 4px 12px #999;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.content-title{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.content-title h1{
+    font-size: 42px;
+    font-weight: normal;
+    border-bottom: 2px solid #000
+}
+.user-tasks{
+    width: 800px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+.task-title{
+    display: flex;
+    font-size: 27px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.task-title .date{
+    font-style: italic;
+    margin-left: 20px;
+}
+.task-desc{
+    margin-left: 10px;
 }

@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 800px;
+}
+.container{
+    width: 700px;
+    height: 300px;
+    border-radius: 20px;
+    box-shadow: 8px 8px 4px 2px #ca0;
+    border: 2px solid #ca0;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-around;
+    background-color: rgba(255, 180, 50, 0.4);
+}
+.message{
+    font-size: 20px;
+}
+.email{
+    font-size: 30px;
+}

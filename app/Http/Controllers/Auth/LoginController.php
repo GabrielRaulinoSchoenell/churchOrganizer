@@ -56,7 +56,9 @@ class LoginController extends Controller
                 $message->to($email);
             });
 
-            return view('waiting');
+            return view('waiting', [
+                'user' => $email
+            ]);
         }        
         $remember = $request->input('remember');
 
