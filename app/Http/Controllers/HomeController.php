@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\plan;
 use App\Models\User;
 use App\Models\Church;
+use App\Models\Day_definition;
 
 class HomeController extends Controller
 {
@@ -30,26 +31,30 @@ class HomeController extends Controller
         $id = Auth::user()->id;
 
         $church = Church::find(Auth::user()->company);
+        $churchCreator = User::find($church->creator_id);
+        $churchMembers = count(User::where('company', Auth::user()->company)->get());
+        $churchDays = Day_definition::where('church_id', Auth::user()->company)->get();
 
         $days = plan::where('user_id', $id)->get();
-        $data = [];
-
-        foreach($days as $item){
-            if($item->day > date('Y-m-d')){
-                array_push($data, [$item->day, $item->period,$item->function, $item->notes]);
-            } 
-        }
         
         $update = User::find($id);
-        $update->tasks = count($data);
+        $update->tasks = count($days);
         $update->save();
+
+        $periods = ['manhã', 'tarde', 'noite'];
+        $colors = ['#acf', '#fc8', '#726'];
+
 
         return view('home', [
             'taskMaker' => Gate::allows('task-maker'),
             'configChurch' => Gate::allows('config-church'),
             'days' => $days,
-            'data' => $data,
-            'church' => $church
+            'church' => $church,
+            'periods' => $periods,
+            'colors' => $colors,
+            'churchCreator' => $churchCreator,
+            'churchMembers' => $churchMembers,
+            'churchDays' => $churchDays
         ]);
     }
 

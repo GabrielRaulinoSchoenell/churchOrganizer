@@ -14,9 +14,6 @@ class ChurchController extends Controller
 
     private $periods =['manhã', 'tarde', 'noite'];
 
-    private $week = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
-
-
     public function index($id){
         $church = Church::find($id);
         $days = Day_definition::where('church_id', $church->id)->get();
@@ -28,7 +25,6 @@ class ChurchController extends Controller
             'church' => $church,
             'days' => $days,
             'periods' => $this->periods,
-            'week' => $this->week
         ]);
     }
 

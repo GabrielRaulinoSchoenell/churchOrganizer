@@ -8,24 +8,22 @@
 
 header{
     height: 75px;
-    padding: 5px;
     display: flex;
     justify-content: space-around;
     box-shadow: 0px 2px 5px #999; 
 }
 .logo{
-
     flex: 2;
 }
 .user-info{
     font-size: 25px;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    flex: 1;
+    flex: 6;
 }
 .user-info a{
-    color: #000;
     text-decoration: none;
 }
 .user-info a:visited{

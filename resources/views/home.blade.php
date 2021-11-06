@@ -7,18 +7,44 @@
 @section('logo', 'logo')
 
 @section('user-info')
+    <nav class='options'>
+
+        <a @if(!$configChurch) href='{{route("createChurch")}}' class="active" @else class='unactive' onclick='warning()' @endif>Criar igreja</a>
+        <a @if($configChurch)href='{{route("church", ["id" => Auth::user()->company])}}' class="active" @else class='unactive'@endif >Configurações da igreja</a>
+        <a @if($taskMaker) href='{{route("makeTasks")}}' class='active' @else class='unactive'@endif>Determinar as tarefas</a>
+
+    </nav>
+
     <div class='user-info-name'>
+
+        
+
         <a href='{{route("user")}}'>{{Auth::user()->name}}</a>
         <div>-</div>
         <a href='{{route("church", ["id" => $church->id])}}'>{{$church->name}}</a>
     </div>
-    <div class='profile-photo'></div>
+    <a class='profile-photo' href='{{route("user")}}'></a>
 
     <a id='logout' href='{{route("logout")}}'>sair</a>
 @endsection
 
-@section('aside')
-    {{$church->name}}
+@section('aside')    
+    <a href='{{route("church", ["id" => Auth::user()->company])}}' class='church-image'>Igreja {{$church->name}}</a>
+
+    <div class='church-info'>
+        <div class='church-content'>Nome: {{$church->name}}</div>
+        <div class='church-content'>Pastor: {{$churchCreator->name}}</div>
+        <div class='church-content'>Local: {{$church->local}}</div>
+        <div class='church-content'>Membros: {{$churchMembers}}</div>
+
+        <div class='church-content'>Dias de culto: 
+            @foreach($churchDays as $day)
+                <br> | {{$week[$day->day]}}, {{$periods[$day->period]}} |
+            @endforeach            
+        </div>
+        <div class='church-content'>Sobre nós</div>
+    </div>
+
 @endsection
 
 
@@ -27,68 +53,27 @@
         <h1>Suas Tarefas:</h1>
     </div>
 
-        @foreach($data as $item)
-        <div class='user-tasks'>
+    @if(count($days) > 0)
+        @foreach($days as $item)
+            @if($item->day > date('Y-m-d'))
+
+
+        <div class='user-tasks' style='box-shadow: 12px 0px 1px {{$colors[$item->period]}}'>
             <div class='task-title'>
-                <h1>{{$item[2]}}</h1>
-                <div class='date'>{{$item[0]}}</div>
+                <h1>{{$item->function}}</h1>
+                <div class='date'>{{$item->day}}</div>
             </div>
             <div class='task-desc'>
-                {{$item[3]}}
-
-                @if($item[1] === 0)
-                    Manhã
-                @endif    
-                @if($item[1] === 1)
-                    Tarde
-                @endif
-                @if($item[1] === 2)
-                    Noite
-                @endif
+                {{$item->notes}}
+            </div>
+            <div>
+                no período da <strong>{{$periods[$item->period]}}</strong>
             </div>
         </div>
-            {{-- HomeController criei uma array sem keys, porisso os numeros (day, period, function e notes) --}}
+            @endif
         @endforeach
+    @else
+        <div class='unactive'>não há tarefas no momento</div>
+    @endif
 
 @endsection
-
-
-{{--
-suas ultimas tarefas: 
-<br>
-//<br> 
-//<br>
-
-
-@foreach($data as $item)
-    <hr>
-    <div>{{$item[0]}} no periodo da {{$item[1]}}</div>
-    <div>{{$item[2]}}</div>
-    <div>{{$item[3]}}</div> --}}
-    {{-- HomeController criei uma array sem keys, porisso os numeros (day, period, function e notes) --}}
-{{-- @endforeach
-
-
-<br><br><br>
-
-
-@if(!$configChurch)
-
-    <a href='{{route("createChurch")}}'>Criar igreja</a>
-
-@endif
-
-<br>
-@if($taskMaker)
-
-    <a href='{{route("makeTasks")}}'>determinar as tarefas</a>
-
-@endif
-
-<br><br>
-
-@if($configChurch)
-    <a href='{{route("church", ["id" => Auth::user()->company])}}'>alterar configurações da igreja</a>
-@endif
-
-<br><br> --}}
