@@ -1,0 +1,142 @@
+@keyframes colorize {
+    0%{
+        transform:rotate(1deg);
+    }
+    50%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(1deg);
+    }
+}
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+:root{
+    --color: #000;
+    --background:  #fac;
+    --background-dark: #957;
+    --page-ground: #fff;
+}
+body[theme='dark']{
+    --color: #fff;
+    --background: #333;
+    --background-dark: #222;
+    --page-ground: #000;
+}
+
+header, section{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    animation-name: colorize;
+    animation-iteration-count: infinite;
+    animation-duration: 8s;
+    width: 99vw;
+}
+.container{
+    width: 1000px;
+    display: flex;
+    padding: 50px 50px 0px 50px;
+    box-shadow: 2px 3px 7px #444;
+    justify-content: space-between;
+    background: linear-gradient(90deg, var(--background), var(--background-dark));
+    
+}
+.curve-border{
+    
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.church-photo{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 150px;
+    height: 150px;
+    border-top-left-radius: 70px;
+    border-top-right-radius: 10px;
+    box-shadow: 6px 5px 10px #333;
+}
+.church-content{
+    display: flex;
+    text-align: center;
+    align-self:flex-end;
+    font-size: 55px;
+}
+.church-info{
+    align-self: flex-end;
+}
+
+.content-main{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.content-main form{
+    display: flex;
+    flex-direction: column;
+}
+.content-main form label{
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
+    font-size: 28px;
+}
+.content-main form input{
+    font-size: 28px;
+    margin: 12px;
+    border-radius: 10px;
+}
+.content-main form input[type='submit']{
+    border-radius: 10px;
+    background-color: var(--background-dark);
+    color: var(--page-ground);
+    border: 2px solid #222;
+    cursor: pointer;
+}
+.content-main form input[type='submit']:hover{
+    background-color: var(--background);
+    color: var(--color);
+}
+.church-config{
+    display: flex;
+    flex-direction: column;
+}
+.define-days{
+    font-size: 28px;
+    color: var(--color);
+    text-decoration: none;
+    color: var(--color);
+    padding: 1px;
+    border: 2px solid #222;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: var(--background-dark);
+    color: var(--page-ground);
+}
+.define-days:hover{
+    background-color: var(--background);
+    color: var(--color);
+}
+.days{
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    margin: 10px;
+}
+
+.warning{
+    position: absolute;
+    top: 0;
+    width: 300px;
+    border: 4px solid #900;
+    background-color: rgba(255, 255, 0, 0.4);
+    display: flex;
+    align-content: center;
+    font-size: 18px;
+    z-index: 999;
+}

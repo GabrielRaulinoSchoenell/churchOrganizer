@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 <head>
+    <link href='{{asset("css/header.css")}}' rel='stylesheet'>
     <link href='{{asset("css/home.css")}}' rel='stylesheet'>
 </head>
 
@@ -9,20 +10,23 @@
 @section('user-info')
     <nav class='options'>
 
-        <a @if(!$configChurch) href='{{route("createChurch")}}' class="active" @else class='unactive' onclick='warning()' @endif>Criar igreja</a>
-        <a @if($configChurch)href='{{route("church", ["id" => Auth::user()->company])}}' class="active" @else class='unactive'@endif >Configurações da igreja</a>
-        <a @if($taskMaker) href='{{route("makeTasks")}}' class='active' @else class='unactive'@endif>Determinar as tarefas</a>
+        <a @if(!$configChurch) href='{{route("createChurch")}}' class='active' style='color: var(--font-color)' 
+            @else  style='color: var(--fontcolor-unactive)' onclick='warning()' @endif>Criar igreja</a>
+
+        <a @if($configChurch)href='{{route("church", ["id" => Auth::user()->company])}}'class='active' style='color: var(--font-color)' 
+            @else style='color: var(--fontcolor-unactive)'@endif >Configurações da igreja</a>
+
+        <a @if($taskMaker) href='{{route("makeTasks")}}' class='active' style='color: var(--font-color)' 
+            @else style='color: var(--fontcolor-unactive)'@endif>Determinar as tarefas</a>
 
     </nav>
 
     <div class='user-info-name'>
-
-        
-
         <a href='{{route("user")}}'>{{Auth::user()->name}}</a>
         <div>-</div>
         <a href='{{route("church", ["id" => $church->id])}}'>{{$church->name}}</a>
     </div>
+    
     <a class='profile-photo' href='{{route("user")}}'></a>
 
     <a id='logout' href='{{route("logout")}}'>sair</a>
@@ -37,12 +41,18 @@
         <div class='church-content'>Local: {{$church->local}}</div>
         <div class='church-content'>Membros: {{$churchMembers}}</div>
 
-        <div class='church-content'>Dias de culto: 
+        <table class='church-content'>
+            <thead>
+                <th>Dia de culto</th>
+                <th>Turno</th>
+            </thead>
             @foreach($churchDays as $day)
-                <br> | {{$week[$day->day]}}, {{$periods[$day->period]}} |
+                <tr>
+                    <td>{{$week[$day->day]}}</td>
+                    <td>{{$periods[$day->period]}}</td>
+                </tr>
             @endforeach            
-        </div>
-        <div class='church-content'>Sobre nós</div>
+        </table>
     </div>
 
 @endsection

@@ -6,14 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('page-title')</title>
 </head>
-<body theme='dark'>
+<body>
     <header>
-        <div class='logo'>@yield('logo')</div>
-        <div class='user-info'>@yield('user-info')</div>
+        <div class='container'>@yield('logo')</div>
     </header>
-    <section class='container'>
-        <aside>@yield('aside')</aside>
-        <section class='content'>@yield('content')</section>
+    <section>
+        <div class='container curve-border'>@yield('content')</div>
     </section>
 </body>
 </html>

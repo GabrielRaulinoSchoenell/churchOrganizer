@@ -56,12 +56,27 @@ class ChurchController extends Controller
     public function changeChurchInfo($id, Request $request){
         
         $data = $request->only(['name', 'local']);
+        $id = Auth::user()->company; 
+        $church = Church::find($id);
+        $days = Day_definition::where('church_id', $church->id)->get();
 
-        $update = Church::where('church_id', Auth::user()->company);
+        if(strlen($data['name']) > 30){
+            return view('church.church', [
+                'configChurch' => Gate::allows('config-church'),
+                'id' => $id,
+                'church' => $church,
+                'days' => $days,
+                'periods' => $this->periods,
+                'warning' => 'O nome de sua igreja deve conter menos de 20 caracteres'
+            ]);
+        } 
+
+        $update = Church::find(Auth::user()->company);
         $update->name = $data['name'];
         $update->local = $data['local']; 
+        $update->save();
         
-        return redirect()->route('church', ['id' => Auth::user()->company]);
+        return redirect()->route('church', ['id' => $id]);
     }
 
     public function churchConfig($id){ 
